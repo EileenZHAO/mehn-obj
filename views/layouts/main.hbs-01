@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><![endif]-->
+	<meta name="viewport" content="width=device-width">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<base href="/">
+	<title>Sprint Bootstrap Website Design::::,</title>
+	<link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="stylesheets/dist/mehn-obj.css">
+
+	{{{_sections.head}}}
+</head>
+<body>
+<header>
+	<nav class="navbar navbar-default navbar-inverse navbar-fixed-top">
+		<div class="container container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="/">项目名称</a>
+			</div>
+			<div id="navbar" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="/">主页</a></li>
+					<li><a href="/about">关于</a></li>
+					<li><a href="/contact">联系我们</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="/users/signup" id="sign-up" class="btn btn-lg">注册</a></li> <!-- data-toggle="modal" data-target="#myModal"-->
+					<li><a href="/users/signin" id="sign-in"  class="btn btn-lg">登录</a></li> <!-- data-toggle="modal" data-target="#exampleModal"-->
+				</ul>
+			</div>
+			<!--/.nav-collapse -->
+		</div>
+		<!--/.container-fluid -->
+	</nav>
+    {{{_sections.banner}}}
+</header>
+<main class="container">
+	{{{body}}}
+</main>
+<footer>
+	<section class="">
+		<div class="">
+			<dl class="footer_first">
+				<dt>APICloud产品</dt>
+				<dd>
+					<a href="/superwebview">SuperWebView</a>
+				</dd>
+				<dd>
+					<a href="/deepengine">Deep Engine</a>
+				</dd>
+				<dd>
+					<a href="/cloudservice">数据云</a>
+				</dd>
+				<dd>
+					<a href="/cloudmanage">运营云</a>
+				</dd>
+				<dd>
+					<a href="#">APP定制</a>
+				</dd>
+				<dd>
+					<a href="/modulestore">模块Store</a>
+				</dd>
+			</dl>
+			<dl class="footer_second">
+				<dt>VIP服务</dt>
+				<dd>
+					<a href="/vipservice/price">VIP服务</a>
+				</dd>
+				<dd>
+					<a href="/vipservice/plan">云服务价格</a>
+				</dd>
+				<dd>
+					<a href="/vipservice/channel">渠道打包</a>
+				</dd>
+				<dd>
+					<a href="/vipservice/enterpEdition">优先技术支持</a>
+				</dd>
+				<dd>
+					<a href="/vipservice/course">培训课程</a>
+				</dd>
+				<dd>
+					<a href="/vipservice/attest">认证工程师</a>
+				</dd>
+			</dl>
+			<dl>
+				<dt>资源</dt>
+				<dd>
+					<a href="#" rel="nofollow">文档</a>
+				</dd>
+				<dd>
+					<a target="_blank" href="#">视频教程</a>
+				</dd>
+				<dd>
+					<a target="_blank" href="#" rel="nofollow">SDK下载</a>
+				</dd>
+				<dd>
+					<a target="_blank" href="/devtools">开发工具</a>
+				</dd>
+				<dd>
+					<a target="_blank" href="/source_code">源码下载</a>
+				</dd>
+			</dl>
+			<dl>
+				<dt>APICloud</dt>
+				<dd>
+					<a href="/about" rel="nofollow">关于我们</a>
+				</dd>
+				<dd>
+					<a href="#" rel="nofollow">服务条款</a>
+				</dd>
+				<dd>
+					<a href="#" rel="nofollow">隐私条款</a>
+				</dd>
+				<dd>
+					<a href="/blog">Blog</a>
+				</dd>
+			</dl>
+			<!--<link rel="stylesheet" href="/css/lang.css"/>-->
+			<dl class="langouter">
+				<div class="langbox" id="selectLang">
+					<div class="leftimg imgCN">
+						<!-- <img src="/img/zh-CN.png" alt="中文"/> -->
+					</div>
+					<div class="rightlabel">简体中文</div>
+				</div>
+				<div class="hidebox">
+					<div class="lang-tri-bottom"></div>
+					<div class="langbox selected" lang="zh-CN">
+						<div class="leftimg imgCN">
+							<!-- <img src="/img/zh-CN.png" alt="中文"/> -->
+						</div>
+						<div class="rightlabel">简体中文</div>
+					</div>
+					<div class="langbox" lang="en-US">
+						<div class="leftimg imgUS">
+							<!-- <img src="/img/en-US.png" alt="English"/> -->
+						</div>
+						<div class="rightlabel">English</div>
+					</div>
+				</div>
+			</dl>
+			<div class="footer-right">
+				<div class="row share">
+					<a href="#" class="share-links weixinImg">
+						<!-- <img src="../img/index-icon-weixin.png"  alt="app开发"  class="share-icon"/> -->
+					</a>
+					<a rel="nofollow" href="#" target="_blank" class="share-links weiboImg">
+						<!-- <img src="../img/index-icon-weibo.png"  alt="移动应用开发"  class="share-icon"/> -->
+					</a>
+					<a rel="nofollow" href="#" target="_blank" class="share-links facebook">
+						<!-- <img src="../img/index-icon-facebook.png"  alt="phonegap 教程"  class="share-icon"/> -->
+					</a>
+					<a rel="nofollow" href="#" target="_blank" class="share-links twitter">
+						<!-- <img src="../img/index-icon-twitter.png"  alt="html5 app 开发"  class="share-icon"/> -->
+					</a>
+				</div>
+				<div class="qrcode" title="APICloud"></div>
+			</div>
+		</div>
+	</section>
+	<section class="link-exchange-box">
+		<div class="link-exchange">
+			<h5 class="tab">友情链接</h5>
+			<h5 class="tab">热门标签</h5>
+			<p class="list-con">
+				<a  target="_blank" href="http://www.jyqkw.com">毕业论文</a>
+				<a  target="_blank" href="http://www.apicloud.com/">免费网站制作软件</a>
+				<a  target="_blank" href="http://www.apicloud.com/">手机应用平台</a>
+				<a  target="_blank" href="http://www.apicloud.com/">android软件开发</a>
+				<a  target="_blank" href="http://www.duyan.com.cn">在职研究生</a>
+				<a  target="_blank" href="http://www.xinhongru.com/">网站建设</a>
+				<a  target="_blank" href="http://www.ihuashi.cn/">鲜花网</a>
+				<a  target="_blank" href="http://java.tedu.cn/">Java培训</a>
+				<a  target="_blank" href="http://www.ht.cn/">商标转让网</a>
+				<a  rel="nofollow" target="_blank" href="http://www.sdk.cn">SDKcn</a>
+				<a  target="_blank" href="http://www.fangcloud.com">企业网盘</a>
+				<a  target="_blank" href="http://www.scswsxy.com">成都幼师学校</a>
+				<a  target="_blank" href="http://www.hao123.com/">好123</a>
+				<a  target="_blank" href="http://www.zhaopinhui.org">招聘会</a>
+				<a  target="_blank" href="http://www.youwinedu.com">优胜教育</a>
+				<a  target="_blank" href="http://www.bjgongteng.com">商标查询</a>
+				<a  target="_blank" href="http://www.noyes.cn/">手机游戏</a>
+				<a  target="_blank" href="http://www.zwcad.com">CAD</a>
+				<a  target="_blank" href="http://app.apicloud.com/">app外包公司</a>
+				<a  target="_blank" href="http://www.apicloud.com/blog">apicloud</a>
+				<a  target="_blank" href="http://www.shandongrs.com">山东人事考试信息网</a>
+				<a  target="_blank" href="http://www.apicloud.com/dev/">app studio</a>
+				<a  target="_blank" href="http://hao.jiameng.com/">开店找项目</a>
+				<a  target="_blank" href="http://www.bjsxt.com">尚学堂</a>
+				<a  target="_blank" href="http://www.weaoo.com/">天气预报</a>
+				<a  target="_blank" href="http://he.zgjsks.com">河南招教网</a>
+				<a  target="_blank" href="http://www.la-mo.com">办公室设计</a>
+				<a  target="_blank" href="http://www.kejilie.com">科技资讯</a>
+				<a  rel="nofollow" target="_blank" href="http://www.geetest.com">极验验证</a>
+				<a  target="_blank" href="http://www.xiaoshouyi.com">销售易</a>
+				<a  rel="nofollow" target="_blank" href="http://www.ucpaas.com">云之讯</a>
+				<a  target="_blank" href="http://www.apicloud.com">HTML5 APP开发</a>
+				<a  rel="nofollow" target="_blank" href="http://www.polyv.net"> 保利威视</a>
+				<a  target="_blank" href="http://www.apicloud.com/">APP开发工具</a>
+				<a  target="_blank" href="http://www.leikeji.com                           ">雷科技</a>
+				<a  target="_blank" href="http://www.antrol.com">蚁巡</a>
+				<a  rel="nofollow" target="_blank" href="http://www.hwclouds.com">华为云</a>
+				<a  rel="nofollow" target="_blank" href="http://segmentfault.com">SegmentFault</a>
+				<a  target="_blank" href="http://apistore.baidu.com                        ">API Store</a>
+				<a  target="_blank" href="http://www.ctoutiao.com">创头条</a>
+				<a  target="_blank" href="http://www.html580.com">HTML前端大全</a>
+				<a  target="_blank" href="http://www.apkbus.com">安卓巴士</a>
+				<a  target="_blank" href="http://lbs.amap.com">高德开放平台</a>
+				<a  target="_blank" href="http://www.kuaifawu.com">快法务</a>
+				<a  target="_blank" href="http://www.androidchina.net">AndroidChina</a>
+				<a  target="_blank" href="http://www.devstore.cn">DevStore</a>
+				<a  target="_blank" href="http://www.oneapm.com">OneAPM</a>
+				<a  target="_blank" href="http://www.tuling123.com">图灵机器人</a>
+				<a  target="_blank" href="http://app.apicloud.com/">App定制</a>
+				<a  target="_blank" href="http://www.joyowo.com">社保代缴</a>
+				<a  target="_blank" href="http://www.gizwits.com">机智云</a>
+				<a  target="_blank" href="http://www.ijiami.cn">爱加密</a>
+				<a  rel="nofollow" target="_blank" href="http://www.xfyun.cn">讯飞开放平台</a>
+				<a target="_blank" href="/link" rel="nofollow">更多</a>
+			</p>
+			<p class="list-con" >
+				<a target="_blank" href="http://www.apicloud.com/">APP开发</a>
+				<a target="_blank" href="http://www.apicloud.com/">手机APP开发</a>
+				<a target="_blank" href="http://www.apicloud.com/">手机APP制作</a>
+				<a target="_blank" href="http://www.apicloud.com/blogDetails?id=272">APP开发需要多少钱</a>
+				<a target="_blank" href="http://www.apicloud.com/blogDetails?id=273">软件开发流程</a>
+				<a target="_blank" href="http://www.apicloud.com/blogDetails?id=104">开发一款app多少钱</a>
+				<a target="_blank" href="http://www.apicloud.com/blogDetails?id=274">sessionStorage</a>
+				<a target="_blank" href="http://www.apicloud.com/blogDetails?id=276">bundleId</a>
+				<a target="_blank" href="http://www.apicloud.com/blogDetails?id=277">relation</a>
+				<a target="_blank" href="http://www.apicloud.com/mod_detail?mdId=22430">付钱拉</a>
+				<a target="_blank" href="http://www.apicloud.com/signup">手机注册</a>
+			</p>
+		</div>
+	</section>
+	<section class="copyright">
+		<label>
+			&copy;2014-2016&nbsp;APICloud&nbsp;&nbsp;&nbsp;&nbsp;<a target="_blank" href="http://www.miitbeian.gov.cn/state/outPortal/loginPortal.action" rel="nofollow">京ICP备14027692号</a>&nbsp;&nbsp;&nbsp;&nbsp;京ICP证151131号&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802020063" target="_blank" rel="nofollow">京公网安备 11010802020063号</a>
+		</label>
+	</section>
+</footer>
+<script src="vendor/jquery/dist/jquery.min.js"></script>
+<script src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="vendor/validator/validator.min.js"></script>
+<!--<script src="javascripts/dist/mehn-obj.min.js"></script>-->
+{{{_sections.customjs}}}
+</body>
+</html>

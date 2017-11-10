@@ -1,0 +1,66 @@
+{{#section 'head'}}
+	<!-- we want Google to ignore this page -->
+	<meta name="robots" content="noindex">
+{{/section}}
+
+<h1>contact page</h1>
+<p>We're testing some jQuery stuff.</p>
+<!--{{> discount}}-->
+
+<!--{{#section 'customjs'}}
+	<script>
+		$('document').ready(function(){
+			$('h1').html('jQuery Works');
+		});
+	</script>
+{{/section}}-->
+
+<hr />
+
+
+
+<div class="modal-dialog" role="document">
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<h4 class="modal-title" id="exampleModalLabel">发送邮件</h4>
+		</div>
+		<div class="modal-body">
+			<form method="POST"
+			      action="/send-email"
+			      name="email"
+			      class="form-horizontal">
+				<div class="form-group">
+					<label class="col-sm-2 control-label">标题</label>
+					<div class="col-sm-10">
+						<input class="form-control"
+						       type="text"
+						       name="subj"
+						       id="recipients">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">收件人</label>
+					<div class="col-sm-10">
+						<input class="form-control"
+						       type="email"
+						       name="to"
+						       id="subj">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">邮件内容</label>
+					<div class="col-sm-10">
+						<textarea name="body" cols="63" rows="8"></textarea>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">发送</label>
+					<div class="col-sm-10">
+						<input type="submit" value="send">
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

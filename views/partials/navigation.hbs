@@ -1,0 +1,68 @@
+{{#each partials.navigationContext.locations}}
+	<div class="navbar-header">
+		<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+			<span class="sr-only">Toggle navigation</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		</button>
+
+		<!--<a href="../" class="navbar-brand"><img class="img-responsive" alt="Responsive image" width="50px"
+		                                        src="images/handlebars_logo.png"/></a>-->
+		<ul class="nav navbar-nav ">
+			<li class="area"> <a id="city" href="http://www.jieqinwang.com/Index/index/changecity/1"
+			                     title="选择您所在的城市">
+				[ 成都 <i class="caret"></i> ]
+			</a>
+			</li>
+		</ul>
+	</div>
+	<div id="navbar" class="collapse navbar-collapse">
+		<ul class="nav navbar-nav">
+			<li><a href="/">首页</a></li>
+			<li><a href="/about">关于我们</a></li>
+			<li><a href="/contact">联系我们</a></li>
+			{{#if Loginname}}
+				<li><a href="#/settings"
+				       class="dropdown-toggle"
+				       data-toggle="dropdown">应用
+					<span class="caret"></span>
+				</a>
+					<ul class="dropdown-menu" role="menu">
+						<li class="dropdown-header">用户</li>
+						<li><a href="/users/list">用户列表</a></li>
+						<li class="divider"></li>
+						<li class="dropdown-header">博客</li>
+						<li><a href="#">新增博客</a></li>
+						<li><a href="#">查看博客</a></li>
+						<!--
+                          <li class="divider"></li>
+                          <li class="dropdown-header">CMS</li>
+                          <li><a href="#">Site SEO Set </a></li>
+                          <li><a href="#">Navigation</a></li>
+                          <li><a href="#">Page Content</a></li>
+                          -->
+					</ul>
+				</li>
+			{{/if}}
+		</ul>
+		<ul class="nav navbar-nav navbar-right">
+
+			{{#if Loginname}}
+				<li> <a  class="dropdown-toggle glyphicon glyphicon-user"
+				         data-toggle="dropdown"> 您好 {{Loginname}}<span class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li> <a href="/users/changpwd" class="active">修改密码</a></li>
+						<li> <a href="/users/profile" class="active">完善资料</a></li>
+						<li> <a href="/api/blogs" class="active">我的博客</a></li>
+						<li id="signout"> <a href="/users/list" class="active" ><span class="glyphicon glyphicon-log-out">&nbsp;</span>退出  </a></li>
+					</ul>
+				</li>
+			{{else}}
+				<li id="signin"> <a href="/users/signin" class="active "><span class="glyphicon glyphicon-log-in"></span> 登录 </a></li>
+				<li ><a href="/users/signup"><span class="glyphicon glyphicon-registration-mark"></span> 注册</a> </li>
+
+			{{/if}}
+		</ul>
+	</div><!-- /.nav-collapse -->
+{{/each}}

@@ -1,0 +1,242 @@
+{{#section 'head'}}
+	<link href="./vendor/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+{{/section}}
+
+
+<section class="container">
+
+	{{#each users}}
+		{{#if picture}}
+			<img src="{{picture}}">
+		{{else}}
+			<div >你还没有头像，请上传一张头像</div>
+
+		{{/if}}
+	{{/each}}
+			<form class="form-horizontal" role="form"
+			      enctype="multipart/form-data"
+			      method="POST"
+			      action="/users/upload-profile/{{UID}}/{{year}}/{{month}}/{{timestr}}">
+
+				<div class="form-group">
+					<label for="fieldPhoto" class="col-sm-2 control-label">Profile Photo</label>
+					<div class="col-sm-4">
+						<input
+							type="file"
+							class="form-control"
+							required
+							id="fieldPhoto"
+							name="photo">
+						<input type="hidden" name="uid" value="{{UID}}">
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-4">
+						<button type="submit"
+						        class="btn btn-primary">提交</button>
+					</div>
+				</div>
+			</form>
+	<hr />
+
+
+
+
+
+	<!--<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">-->
+		<!--<div class="modal-dialog" role="document">
+			<div class="modal-content">-->
+				<div class="modal-header">
+					<!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+					<h4 class="modal-title text-center" id="myModalLabel">完善用户信息</h4>
+				</div>
+				<div class="modal-body">
+{{#each users}}
+					<form class="form-horizontal"
+					      name="completeinfo"
+					      id="completeinfo"
+					      action=""
+					      method="POST">
+						<div class="form-group">
+							<label class="col-sm-2 control-label">电话</label>
+							<div class="col-sm-10">
+								<input class="form-control"
+								       placeholder="电话"
+								       type="tel"
+								       name="phone"
+								       id="phone"
+								       value="{{phone}}"
+								       readonly>
+								<div id="phoneErro" class="alert alert-danger" role="alert"></div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">姓名</label>
+							<div class="col-sm-10">
+								<input class="form-control"
+								       placeholder="姓名"
+								       type="text"
+								       name="realname"
+								       id="realname"
+								       value="{{realname}}"
+								       required>
+								<div id="realnameErro" class="alert alert-danger" role="alert"></div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">昵称</label>
+							<div class="col-sm-10">
+								<input class="form-control"
+								       placeholder="昵称"
+								       type="text"
+								       name="nickname"
+								       id="nickname"
+								       value="{{nickname}}"
+								       required>
+								<div id="nicknameErro" class="alert alert-danger" role="alert"></div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">年龄</label>
+							<div class="col-sm-10">
+								<input class="form-control"
+								       placeholder="年龄"
+								       type="text"
+								       name="age"
+								       id="age"
+								       value="{{age}}"
+								       required>
+								<div id="ageErro" class="alert alert-danger" role="alert"></div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">性别</label>
+							<div class="col-sm-10">
+								<div class="radio col-sm-1">
+									<label>
+										<input type="radio" name="gender" id="male" value="1">
+										男
+									</label>
+								</div>
+								<div class="radio col-sm-1">
+									<label>
+										<input type="radio" name="gender" id="female" value="0">
+										女
+									</label>
+								</div>
+								<!--<div class="col-sm-8"></div>-->
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">地址</label>
+							<div class="col-sm-10">
+								<input class="form-control"
+								       placeholder="地址"
+								       type="text"
+								       name="address"
+								       id="address"
+								       value="{{address}}"
+								       required>
+								<div id="addressErro" class="alert alert-danger" role="alert"></div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+							<button id="save" type="button" class="btn btn-primary" onclick="validatorProfile();">保存</button>
+						</div>
+					</form>
+{{/each}}
+				</div>
+
+			<!--</div>-->
+		<!--</div>-->
+	<!--</div>-->
+</section>
+
+
+
+
+{{#section 'customjs'}}
+	<script>
+		function validatorProfile() {
+			var ret = true;
+			if(!validator.isLength($("#realname").val(), {min: 2, max: 20})) {
+				ret = false;
+				$("#realnameErro").addClass("erroMsg").text("用户名必须在4-20字符之间");
+				$("#realname").focus();
+				return false;
+			}
+			if(!validator.isLength($("#nickname").val(), {min: 3, max: 16})) {
+				ret = false;
+				$("#nicknameErro").addClass("erroMsg").text("昵称必须在4-20字符之间");
+				$("#nickname").focus();
+				return false;
+			}
+			if(!($("#age").val() >= 18)) {
+				ret = false;
+				$("#ageErro").addClass("erroMsg").text("年龄必须大于18岁");
+				$("#age").focus();
+				return false;
+			}
+			if(!validator.isLength($("#address").val(), {min: 1, max: 30})) {
+				ret = false;
+				$("#addressErro").addClass("erroMsg").text("地址不能为空");
+				$("#address").focus();
+				return false;
+			}
+			if(ret) saveProfile();
+		}
+
+
+
+		function saveProfile() {
+			var para = $("#completeinfo").serialize();
+			alert(para);
+			$.ajax({
+				url: '/users/save-profile',
+				type: 'POST',
+				async: true,
+				data: para,
+				success: function (res) {
+					if(parseInt(res.code) === 0) {
+						alert(res.msg);
+					}
+					if(parseInt(res.code) === 1) {
+
+						//window.location.href = res.url;
+						getMyProfile();
+
+					}
+				}
+			});
+		}
+
+
+		$(document).ready(function () {
+			getMyProfile();
+		});
+
+		function getMyProfile() {
+			var para  ='';// $("#signform").serialize();
+			$.ajax({
+				url:'/users/profile',
+				type: 'GET',
+				async:true,
+				data:para,
+				success: function(res) {
+					console.log(res)
+					if(parseInt(res.users[0].gender) === 0) {
+						$("#female").attr("checked", "checked");
+					}
+					if(parseInt(res.users[0].gender) === 1) {
+						$("#male").attr("checked", "checked");
+					}
+					$("#realname").val(res.users[0].realName);
+					$("#nickname").val(res.users[0].nickName);
+					$("#age").val(res.users[0].age);
+					$("#address").val(res.users[0].address);
+				}
+			});
+		}
+	</script>
+{{/section}}

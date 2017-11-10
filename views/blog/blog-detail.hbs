@@ -1,0 +1,58 @@
+{{#section 'head'}}
+	<link href="./vendor/datatables.net-bs/css/dataTables.bootstrap.min.css"
+	      rel="stylesheet">
+{{/section}}
+
+	<section>
+		<h1>{{title}}</h1>
+		<div>{{content}}</div>
+	</section>
+	<hr>
+
+<div>
+	<h4>评论</h4>
+	<div id="blog-comment"></div>
+</div>
+
+	<hr>
+{{#section 'customjs'}}
+	<script src="./vendor/datatables.net/js/jquery.dataTables.min.js"></script>
+	<script src="./vendor/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+	<script src="./javascripts/common.js"></script>
+	<script>
+		$(document).ready(function () {
+			getCommentContent();
+		});
+
+		function getCommentContent() {
+			var para = '';
+			$.ajax({
+				url: '/api/blogs-list',
+				type: 'GET',
+				asycn: true,
+				data: para,
+				success: function (res) {
+					if(parseInt(res.code)==1) {
+						console.log(res);
+						showComment(res.blog);
+					}
+				}
+			});
+		}
+
+
+		function showComment(blog) {
+			//console.log(blog);
+			let blog_length = blog.length;
+			//console.log(blog[0].comment);
+			for(var i = 0; i < blog_length; i++) {
+				let comment_length = blog[i].comment.length;
+				console.log(comment_length);
+				for(var j = 0; j < comment_length; j++) {
+					//$("#" + blog[i]._id).text("评论（" + blog[i].comment.length + "）");
+				$("#blog-comment").append(`<div>${blog[i].comment[j].content}</div>`);
+				}
+			}
+		}
+	</script>
+{{/section}}

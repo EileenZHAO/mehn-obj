@@ -1,0 +1,244 @@
+{{#section 'head'}}
+	<link href="./vendor/datatables.net-bs/css/dataTables.bootstrap.min.css"
+	      rel="stylesheet">
+	<style>
+		table.dataTable thead .sorting_asc:after {
+			content: "";
+		}
+		table.dataTable thead .sorting_desc:after {
+			content: "";
+		}
+		table.dataTable thead>tr>th.sorting_asc {
+			padding-right: 0;
+		}
+		table.dataTable thead>tr>th.sorting_desc {
+			padding-right: 0;
+		}
+		table.dataTable thead {
+			display: none;
+		}
+		div.write-blog {
+			text-align: right;
+			padding-bottom: 10px;
+
+		}
+		div.write-blog > button {
+			font-size: 20px;
+		}
+	</style>
+{{/section}}
+
+<section class="content">
+	<h1>博客页面</h1>
+	<div class="write-blog">
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">写博客</button>
+	</div>
+	<table id="example"
+	       class="table table-striped
+		   table-bordered"
+	       cellspacing="0"
+	       width="100%">
+	</table>
+</section>
+
+<div class="modal fade" id="gridSystemModal" tabindex="-1" role="dialog" aria-labelledby="#gridSystemModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="exampleModalLabel">评论</h4>
+			</div>
+			<div class="modal-body">
+				<form class="form-horizontal"
+				      name="commentForm"
+				      id="commentForm"
+				      action=""
+				      method="POST">
+					<textarea cols="70" rows="6" class="center-block" name="comment" id="comment"></textarea>
+					<input type="hidden" name="blogid" id="blogid">
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+						<button id="confirm" type="button" class="btn btn-primary" onclick="sendComment();">发送</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">写博客</h4>
+			</div>
+			<div class="modal-body">
+				<form class="form-horizontal"
+				      name="addblog"
+				      id="addblog"
+				      action=""
+				      method="POST">
+					<div class="form-group">
+						<span class="col-sm-1"></span>
+						<div class="col-sm-10">
+							<textarea style="width: 100%"></textarea>
+						</div>
+						<span class="col-sm-1"></span>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+						<button id="saveBtn" type="button" class="btn btn-primary">发布</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+{{#section 'customjs'}}
+	<script src="./vendor/datatables.net/js/jquery.dataTables.min.js"></script>
+	<script src="./vendor/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+	<script src="./javascripts/common.js"></script>
+	<script>
+		$(document).ready(function () {
+			getBlogList();
+			//showContent(res.blog[0].comment);
+		});
+
+		function getBlogList() {
+			var para = '';
+			$.ajax({
+				url: '/api/blogs-list',
+				type: 'GET',
+				asycn: true,
+				data: para,
+				success: function (res) {
+					if(parseInt(res.code)==1)
+					{
+						//console.log(res);
+						var _blogSet = getBlogArr(res.blog)
+						renderTable(_blogSet);
+						showContentCount(res.blog);
+					}
+				}
+			});
+		}
+
+		//构造取得的数据
+		function getBlogArr(blogSet) {
+			var _blogArr = blogSet;
+			var jsoncount =_blogArr.length;
+			var userData =  new Array();
+
+			for(var i=0;i<jsoncount;i++) {
+				var _arr = new Array();
+					_arr[0] = `<div class="row">
+									<div class="col-sm-1"><img src="${_blogArr[i].out[0].picture}" class="profileImg" height="50"></div>
+									<div class="col-sm-1">${_blogArr[i].author}</div>
+									<div class="col-sm-10"><h2><a href="/blog/blog-detail/${_blogArr[i]._id}">${_blogArr[i].title}</a></h2></div>
+								</div>
+								<div class="row">
+									<div class="col-sm-12">${_blogArr[i].content}</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-3">${formatDate(_blogArr[i].createdAt)}</div>
+									<div class="col-sm-6"></div>
+									<div class="col-sm-3"><span class="btn commentContent" id="${_blogArr[i]._id}" data-toggle="modal" data-target="#gridSystemModal" onclick="getBlogContent('${_blogArr[i]._id}')"></span> | <span id="" class="btn">分享</span></div>
+								</div>`
+
+				userData[i] = _arr;
+			}
+			return userData;
+		};
+
+		//渲染数据
+		function renderTable(blogSet) {
+				$('#example').DataTable({
+					data: blogSet,
+					columns: [
+						{title: ""},
+					]
+				});
+		}
+
+		function getBlogContent(id) {
+			if(localStorage.getItem("nickName")) {
+				var para = $("#commentForm").serialize();
+				$("#blogid").val(id);
+				$.ajax({
+					type: "GET",
+					async: true,
+					data: para,
+					url: "/blog/get-blog-content/" + id,
+					success: function (res) {
+						if(parseInt(res.code) === 0) {
+							console.log(res.msg);
+						}
+						if(parseInt(res.code) === 1) {
+							//showContentCount(res.blog);
+						}
+					}
+				});
+			}
+			else {
+				alert("请先登录");
+			}
+		}
+
+
+		// 评论
+		function sendComment() {
+			let para = $("#commentForm").serialize();
+			$.ajax({
+				type: "POST",
+				async: true,
+				data: para,
+				url: "/blog/send-comment",
+				success: function (res) {
+					if(parseInt(res.code) === 0) {
+						console.log(res.msg);
+					}
+					if(parseInt(res.code) === 1) {
+						//console.log(res)
+						window.location.href = res.url;
+					}
+				}
+			});
+		}
+
+		// 设置评论、点赞显示
+		function showContentCount(blog) {
+			//console.log(blog);
+			let blog_length = blog.length;
+			//console.log(blog_length);
+			for(var i = 0; i < blog_length; i++) {
+				if(!blog[i].comment) {
+					$("#" + blog[i]._id).text("评论");
+				}
+				else {
+					$("#" + blog[i]._id).text("评论（" + blog[i].comment.length + "）");
+				}
+			}
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	</script>
+{{/section}}

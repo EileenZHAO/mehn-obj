@@ -1,0 +1,84 @@
+<!-- 注册 -->
+{{#section 'head'}}
+	<!-- we want Google to ignore this page -->
+{{/section}}
+<!--<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">-->
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">注册</h4>
+			</div>
+			<div class="modal-body">
+				<form class="form-horizontal"
+				      name="signUpform"
+				      id="signUpform"
+				      action="/signup"
+				      method="POST">
+					<div class="form-group">
+						<label class="col-sm-1 control-label"></label>
+						<div class="col-sm-11">
+							<input class="form-control"
+							       placeholder="请输入电话号码"
+							       type="tel"
+							       name="phone"
+							       id="phone"
+							       required>
+							<div id="phoneErro" class="alert alert-danger" role="alert"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-1 control-label"></label>
+						<div class="col-sm-11">
+							<input class="form-control"
+							       placeholder="密码"
+							       type="password"
+							       name="pwd"
+							       id="pwd"
+							       required>
+							<div id="pwdErro" class="alert alert-danger" role="alert"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-1 control-label"></label>
+						<div class="col-sm-11">
+							<input class="form-control"
+							       placeholder="确认密码"
+							       type="password"
+							       name="repwd"
+							       id="repwd"
+							       required>
+							<div id="repwdErro" class="alert alert-danger" role="alert"></div>
+						</div>
+					</div>
+					<div class="form-group" style="margin-left: 33px;">
+						<!--<label class="col-sm-2 control-label"></label>-->
+						<div class="col-sm-3">
+							<input class="form-control"
+							       placeholder="验证码"
+							       type="text"
+							       name="captcha"
+							       id="captcha"
+							       required>
+							<div id="captchaErro" class="alert alert-danger" role="alert"></div>
+						</div>
+						<div class="col-sm-9">
+							<img src="/captcha" class="col-sm-4" id="captchaImg" onclick="getCaptcha();">
+							<div class="col-sm-8">
+								<p>请填写图片中的字符，不区分大小写</p>
+								<a onclick="getCaptcha();" class="changeOne">看不清楚？换张图片</a>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button id="signup" type="button" class="btn btn-primary" onclick="validatorForm();">提交</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+<!--</div>-->
+{{#section 'customjs'}}
+	<script src="javascripts/signup.js"></script>
+{{/section}}

@@ -1,0 +1,395 @@
+{{#section 'head'}}
+	<link href="./vendor/datatables.net-bs/css/dataTables.bootstrap.min.css"
+	      rel="stylesheet">
+	<style>
+		table.dataTable thead .sorting_asc:after {
+			content: "";
+		}
+		table.dataTable thead .sorting_desc:after {
+			content: "";
+		}
+		table.dataTable thead>tr>th.sorting_asc {
+			padding-right: 0;
+		}
+		table.dataTable thead>tr>th.sorting_desc {
+			padding-right: 0;
+		}
+	</style>
+{{/section}}
+
+<section class="content">
+	<button type="button" id="add" class="btn btn-primary"  data-toggle="modal" data-target=".bs-example-modal-lg">增加</button>
+	<button type="button" id="delete" class="btn btn-danger" data-toggle="modal" data-target="#gridSystemModalLabel">删除</button>
+	<table id="example"
+	       class="table table-striped
+		   table-bordered"
+	       cellspacing="0"
+	       width="100%">
+	</table>
+</section>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">编辑博客</h4>
+			</div>
+			<div class="modal-body">
+				<form class="form-horizontal"
+				      name="completeinfo"
+				      id="completeinfo"
+				      action=""
+				      method="POST">
+					<div class="form-group">
+						<label class="col-sm-2 control-label">标题</label>
+						<div class="col-sm-10">
+							<input class="form-control"
+							       placeholder="标题"
+							       type="text"
+							       name="title"
+							       id="title"
+							       required>
+							<div id="titleErro" class="alert alert-danger" role="alert"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">内容</label>
+						<div class="col-sm-10">
+							<input class="form-control"
+							       placeholder="内容"
+							       type="text"
+							       name="content"
+							       id="content"
+							       required>
+							<div id="contentErro" class="alert alert-danger" role="alert"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">发布者</label>
+						<div class="col-sm-10">
+							<input class="form-control"
+							       placeholder="发布者"
+							       type="text"
+							       name="author"
+							       id="author">
+							<div id="authorErro" class="alert alert-danger" role="alert"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">是否显示</label>
+						<div class="col-sm-10">
+							<div class="radio col-sm-2">
+								<label>
+									<input type="radio" name="isShow" id="show" value="1">
+									是
+								</label>
+							</div>
+							<div class="radio col-sm-2">
+								<label>
+									<input checked type="radio" name="isShow" id="notshow" value="0">
+									否
+								</label>
+							</div>
+							<div class="col-sm-8"></div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+						<button id="saveBtn" type="button" class="btn btn-primary" onclick="saveEidt();">保存</button>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="exampleModalLabel">警告！</h4>
+			</div>
+			<div class="modal-body">
+				<form class="form-horizontal"
+				      name="deleteForm"
+				      id="deleteForm"
+				      action=""
+				      method="POST">
+					<div class="alert alert-danger" style="display: block">你确定要删除本条数据吗？</div>
+					<input type="hidden" name="blogid" id="blogid">
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+						<button id="confirm" type="button" class="btn btn-danger" onclick="deleteBlog();">确定</button>
+					</div>
+				</form>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">新增博客</h4>
+			</div>
+			<div class="modal-body">
+				<form class="form-horizontal"
+				      name="addblog"
+				      id="addblog"
+				      action=""
+				      method="POST">
+					<div class="form-group">
+						<label class="col-sm-2 control-label">标题</label>
+						<div class="col-sm-10">
+							<input class="form-control"
+							       placeholder="标题"
+							       type="text"
+							       name="title"
+							       id="title"
+							       required>
+							<div id="titleErro" class="alert alert-danger" role="alert"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">内容</label>
+						<div class="col-sm-10">
+							<input class="form-control"
+							       placeholder="内容"
+							       type="text"
+							       name="content"
+							       id="content"
+							       required>
+							<div id="contentErro" class="alert alert-danger" role="alert"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">发布者</label>
+						<div class="col-sm-10">
+							<input class="form-control"
+							       placeholder="发布者"
+							       type="text"
+							       name="author"
+							       id="author">
+							<div id="authorErro" class="alert alert-danger" role="alert"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">是否显示</label>
+						<div class="col-sm-10">
+							<div class="radio col-sm-2">
+								<label>
+									<input type="radio" name="isShow" id="show" value="1">
+									是
+								</label>
+							</div>
+							<div class="radio col-sm-2">
+								<label>
+									<input checked type="radio" name="isShow" id="notshow" value="0">
+									否
+								</label>
+							</div>
+							<div class="col-sm-8"></div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+						<button id="saveBtn" type="button" class="btn btn-primary" onclick="addBlog();">保存</button>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="gridSystemModalLabel" tabindex="-1" role="dialog" aria-labelledby="#gridSystemModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="exampleModalLabel">警告！</h4>
+			</div>
+			<div class="modal-body">
+				<form class="form-horizontal"
+				      name="deleteForm"
+				      id="deleteForm"
+				      action=""
+				      method="POST">
+					<div class="alert alert-danger" style="display: block">你确定要删除所选中的数据吗？</div>
+					<input type="hidden" name="blogid" id="blogid">
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+						<button id="confirm" type="button" class="btn btn-danger">确定</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+{{#section 'customjs'}}
+	<script src="./vendor/datatables.net/js/jquery.dataTables.min.js"></script>
+	<script src="./vendor/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+	<script src="./javascripts/common.js"></script>
+	<script>
+		$(document).ready(function () {
+			getBlogList();
+		});
+
+		function getBlogList() {
+			var para = '';
+			$.ajax({
+				url: '/blog/get-blog-list',
+				type: 'GET',
+				asycn: true,
+				data: para,
+				success: function (res) {
+					if(parseInt(res.code)==1)
+					{
+						var _blogSet = getBlogArr(res.blog, res.role)
+						renderTable(_blogSet, res.role);
+					}
+				}
+			});
+		}
+
+		//构造取得的数据
+		function getBlogArr(blogSet, role) {
+			var _blogArr = blogSet;
+			var jsoncount =_blogArr.length;
+			var userData =  new Array();
+
+			for(var i=0;i<jsoncount;i++) {
+				var _arr = new Array();
+				if (role) {
+					_arr[0] = `<input type="checkbox" name="check" id="selectall">`;
+					_arr[1] = _blogArr[i].title;
+					_arr[2] = `<a href="/blog/blog-detail/${_blogArr[i]._id}">${_blogArr[i].content}</a>`;
+					_arr[3] = _blogArr[i].author;
+					if (parseInt(_blogArr[i].isShow) === 0) {
+						_arr[4] = "否";
+					}
+					if (parseInt(_blogArr[i].isShow) === 1) {
+						_arr[4] = "是";
+					}
+					_arr[5] = formatDate(_blogArr[i].createdAt);
+					_arr[6] = '<button class="btn btn-default btn-sm" \
+				 data-toggle="modal" data-target="#myModal" onclick="edit(\'' + _blogArr[i]._id + '\')"> \
+					 <span class="glyphicon glyphicon-pencil"></span> \
+				 </button>  \
+				<button class="btn btn-danger btn-sm" data-toggle="modal" \
+				 data-target="#exampleModal" onclick="edit(\'' + _blogArr[i]._id + '\')"> \
+					<span class="glyphicon glyphicon-trash"></span> \
+				</button>';
+				}
+
+				userData[i] = _arr;
+			}
+			return userData;
+		};
+
+		//渲染数据
+		function renderTable(blogSet, role) {
+			if(role) {
+				$('#example').DataTable({
+					data: blogSet,
+					columns: [
+						{title: `<input type="checkbox" name="check" id="selectall">`},
+						{title: "标题"},
+						{title: "内容"},
+						{title: "发布者"},
+						{title: "是否显示"},
+						{title: "创建时间"},
+						{title: "操作", orderable: false}
+					]
+				});
+			}
+		}
+
+		function addBlog() {
+			var para = $("#addblog").serialize();
+			$.ajax({
+				url: "/blog/add",
+				type: "POST",
+				async: true,
+				data: para,
+				success: function (res) {
+					if(parseInt(res.code) === 0) {
+						alert(res.msg);
+					}
+					if(parseInt(res.code) === 1) {
+						console.log(res);
+						window.location.href = res.url;
+					}
+				}
+			});
+		}
+
+		function edit(id) {
+			$("#blogid").val(id);
+			var para = $("#completeinfo").serialize();
+			$.ajax({
+				url: "blog/show-blog/" + id,
+				type: "GET",
+				async: true,
+				data: para,
+				success: function (res) {
+					if(parseInt(res.blog[0].isShow) === 0) {
+						$("#notshow").attr("checked", "checked");
+					}
+					if(parseInt(res.blog[0].isShow) === 1) {
+						$("#show").attr("checked", "checked");
+					}
+					$("#title").val(res.blog[0].title);
+					$("#content").val(res.blog[0].content);
+					$("#author").val(res.blog[0].author);
+					$("#like").val(res.blog[0].like);
+					$("#comment").val(res.blog[0].comment);
+				}
+			});
+		}
+
+		function saveEidt() {
+			var para = $("#completeinfo").serialize();
+			$.ajax({
+				url: "/blog/save-blog",
+				type: "POST",
+				async: true,
+				data: para,
+				success: function (res) {
+					if(parseInt(res.code) === 0) {
+						console.log(res.msg);
+					}
+					if(parseInt(res.code) === 1) {
+						window.location.href = res.url;
+					}
+				}
+			});
+		}
+
+		function deleteBlog() {
+			var para = "";
+			$.ajax({
+				url: "blog/delete-blog/" + $("#blogid").val(),
+				type: "GET",
+				async: true,
+				data: para,
+				success: function (res) {
+					if(parseInt(res.code) === 0) {
+						alert(res.msg);
+					}
+					if(parseInt(res.code) === 1) {
+						window.location.href = res.url;
+					}
+				}
+			});
+		}
+
+	</script>
+{{/section}}

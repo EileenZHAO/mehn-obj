@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>使用H5中的window.postMessage方法来跨域</title>
+		
+	</head>
+	<body>
+	    <script>
+		 function onLoad(){
+			 var iframe = document.getElementById('otherdomain');
+			 var win = iframe.contentWindow;
+             win.postMessage('{"name":"Bush","phone":"13808013568"}',"http://127.0.0.1:3000");
+		 }
+		</script>
+		<iframe id="otherdomain" src="http://127.0.0.1:3000/postmessage_res.html" onload="onLoad()"></iframe>
+	</body>
+</html>

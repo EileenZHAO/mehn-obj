@@ -1,0 +1,73 @@
+<!-- 登录 -->
+{{#section 'head'}}
+	<!-- we want Google to ignore this page -->
+{{/section}}
+<!--<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">-->
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="exampleModalLabel">登录</h4>
+			</div>
+			<div class="modal-body">
+				<form class="form-horizontal"
+				      name="signInform"
+				      id="signInform"
+				      action="/signin"
+				      method="POST">
+					<div class="form-group">
+						<label for="phone-signin" class="col-sm-1 control-label"></label>
+						<div class="col-sm-11">
+							<input class="form-control"
+							       placeholder="请输入电话号码"
+							       type="tel"
+							       name="phone"
+							       id="phone-signin"
+							       required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="pwd-signin" class="col-sm-1 control-label"></label>
+						<div class="col-sm-11">
+							<input class="form-control"
+							       placeholder="密码"
+							       type="password"
+							       name="pwd"
+							       id="pwd-signin"
+							       required>
+							<div id="repwdErro" class="alert alert-danger" role="alert"></div>
+						</div>
+					</div>
+					<div class="form-group" style="margin-left: 33px;">
+						<div class="col-sm-3">
+							<input class="form-control"
+							       placeholder="验证码"
+							       type="text"
+							       name="captcha"
+							       id="captcha"
+							       required>
+							<div id="captchaErro" class="alert alert-danger" role="alert"></div>
+						</div>
+						<div class="col-sm-9">
+							<img src="/captcha" class="col-sm-4" id="captchaImg" onclick="getCaptcha();">
+							<div class="col-sm-8">
+								<p>请填写图片中的字符，不区分大小写</p>
+								<a onclick="getCaptcha();" class="changeOne">看不清楚？换张图片</a>
+							</div>
+						</div>
+					</div>
+					<div class="checkbox">
+						<a href="#" class="a pull-right">忘记密码？</a>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+						<button id="signin" type="button" class="btn btn-success" onclick="validatorFormtwo();">登录</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+<!--</div>-->
+{{#section 'customjs'}}
+	<script src="javascripts/signin.js"></script>
+{{/section}}
